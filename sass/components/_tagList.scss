@@ -1,0 +1,23 @@
+.tagList{
+    list-style: none;
+    color: $color-primary-background;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    & li{
+        border: 1px solid $color-tag-border;
+        text-transform: capitalize;
+        border-radius: .7rem;
+        font-style: normal;
+        font-weight: 500;
+        font-size: .75rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 2px 5px;
+        margin: 3px;        
+    }
+}
+.activeTag{
+    color: $color-primary-text;
+    background-color: $color-primary-background;
+}

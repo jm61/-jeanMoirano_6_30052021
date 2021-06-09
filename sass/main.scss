@@ -1,1 +1,8 @@
+@import './utils/mixins';
+@import './utils/variables';
 @import './base/base';
+@import './layouts/header';
+@import './pages/homePage';
+@import './components/photographerCard';
+@import './components/tagList';
+@import './pages/photographerPage'

@@ -1,0 +1,23 @@
+.photographerCard{
+    max-width: 400px;
+    width: fit-content;
+    text-align: center;
+    padding: 1em 0;
+    @include tomato;
+    margin: 2em 3em;
+    &__name{
+        cursor: pointer;
+        & img{
+            max-width: 15rem;
+            max-height: 15rem;
+            min-width: 15rem;
+            min-height: 15rem;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-left: 0;
+        }
+    }
+    &__description{
+        margin-bottom: .3rem;
+    }
+}

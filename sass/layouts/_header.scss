@@ -1,0 +1,34 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    @media screen and (max-width: $mobile-bp-max) {
+        flex-direction: column;
+        margin: 1em auto; 
+    }    
+    @media screen and (max-width: $desktop-bp-max) {
+        flex-direction: column;
+        margin: 1em auto;
+        :nth-child(2) {
+            order:1;
+            padding-left: 0;
+        } 
+    }    
+    &__logo{
+        max-width: 12.5rem;
+        max-height: 3rem;
+    }
+    &__nav{
+        padding-top: .8rem;
+        padding-left: 6.25rem;
+        @media screen and (max-width: $mobile-bp-max) {
+            padding: 1em; 
+        } 
+    }
+    &__title{
+        color: $color-primary-background;
+        font-weight: 400;
+    }
+}
