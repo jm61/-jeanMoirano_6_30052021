@@ -1,5 +1,6 @@
 const url = 'dist/data.json';
 const mainContent = document.querySelector('.main__content')
+// get url params from ?id=
 const urlParams = new URLSearchParams(window.location.search)
 const photographerID = urlParams.get('id')
 let photographersList = []
@@ -7,18 +8,20 @@ let photographersList = []
 const getData = async () => {
     const res = await fetch(url)
     const data = await res.json()
+    // get list of photographers data for id
     photographersList = data.photographers
     photographersList.forEach(data => {
         if(data.id == photographerID) {
-            console.log(data.id)
+        // set document title
             document.title = `${data.name} Page`
+        // Constructor class to build profiles
             let PhotographerData = new Photographer(data)
-            mainContent.appendChild(PhotographerData.createCard())
+            mainContent.appendChild(PhotographerData.createProfile())
         }
         })
 }
-getData()
-
+//getData()
+// Photographer profile class
 class Photographer {
     constructor(data) {
     this.id = data.id;
@@ -31,38 +34,43 @@ class Photographer {
     this.tags = data.tags;
     
 // DOM Elements creation and CSS
-    this.createCard = () => {
-        const photographerCard = document.createElement("div");
-        const photographerName = document.createElement("h2");
-        const photographerDetails = document.createElement("p");
-        const photographerTags = document.createElement("ul");
+    this.createProfile = () => {
+       /*  const profile = document.createElement("div");
+        const profileName = document.createElement("h1");
+        const profileDetails = document.createElement("p");
+        const profileTags = document.createElement("ul");
+        const profileContact = document.createElement("button")
+        const profileImage = document.createElement("img")
     
-        photographerCard.classList.add("photographerCard"); 
-        photographerName.classList.add("photographerCard__name"); 
-        photographerDetails.classList.add("photographerCard__description"); 
-        photographerTags.classList.add("tagList"); 
+        profile.classList.add("profile"); 
+        profileName.classList.add("profile__name"); 
+        profileDetails.classList.add("profile__details"); 
+        profileTags.classList.add("profile__tagList");
+        profileContact.classList.add('profile__contact')
+        profileImage.classList.add('profile__img')
 
 // DOM Generation
-        photographerName.innerHTML = `
-        <a href="photographerPage.html?id=${this.id}">
-        <img src="public/images/Photographers/${this.portrait}"><br>${this.name}</a>"`;
+        profileName.innerHTML = `${this.name}`;
 
-        photographerDetails.innerHTML = `
+        profileDetails.innerHTML = `
         <strong>${this.city}, ${this.country} </strong> <br>
-        ${this.tagline}<br>
-        <em> $${this.price} day</em>`;
+        ${this.tagline}<br>`;
 
         this.tags.forEach(e => {
             const tag = document.createElement('li')
             tag.textContent = `#${e}`
-            photographerTags.appendChild(tag)
+            profileTags.appendChild(tag)
         })
 
+        profileImage.innerHTML = `<img src="public/images/Photographers/${this.portrait}" class="photographerProfile__img">;`
+
+        
+
 // DOM Display   
-        photographerCard.appendChild(photographerName);
-        photographerCard.appendChild(photographerDetails);
-        photographerCard.appendChild(photographerTags);
-        return photographerCard;
+        profile.appendChild(profileName);
+        profile.appendChild(profileDetails);
+        profile.appendChild(profileTags); */
+        return ;
     };
   }
 }
