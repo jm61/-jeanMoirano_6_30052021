@@ -119,9 +119,18 @@ a {
   background-color: #901c1c;
 }
 
+body {
+  border: 2px dashed black;
+}
+
 .header__profile {
   display: block;
   padding: 1.2rem;
+}
+@media screen and (min-width: 380px) {
+  .header__profile img {
+    width: 40%;
+  }
 }
 
 .left {
@@ -132,23 +141,34 @@ a {
 .profile {
   background-color: #fafafa;
   display: flex;
+  padding-left: 2em;
   justify-content: flex-start;
   gap: 1em;
-  width: 100vw;
+  max-width: 100%;
+}
+@media screen and (min-width: 380px) {
+  .profile {
+    flex-wrap: wrap;
+  }
 }
 .profile__details {
   display: flex;
   flex-direction: column;
-  margin-right: 2em;
+  margin-right: 1.5em;
 }
 .profile__details__name {
   color: #D3573C;
   font-size: 3.5rem;
   font-weight: 400;
 }
+@media screen and (min-width: 380px) {
+  .profile__details__name {
+    font-size: 2rem;
+  }
+}
 .profile__details__location {
   color: #901c1c;
-  font-weight: lighter;
+  font-weight: normal;
   font-size: 1.4rem;
 }
 .profile__details__tagline {
@@ -157,19 +177,58 @@ a {
   margin: 1.5em 0 1em 0;
 }
 .profile__contact {
-  height: 3.8em;
+  height: 3.5em;
   padding: 0 0.5em;
-  margin: 0 2em;
+  margin: 0 1.5em;
   background-color: #901c1c;
   color: #ffffff;
   border-radius: 0.3em;
   font-size: 1.2rem;
 }
+@media screen and (min-width: 380px) {
+  .profile__contact {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
 .profile__image {
   max-height: 12rem;
+  max-width: 12rem;
   min-width: 12rem;
   min-height: 12rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 20vw;
+}
+@media screen and (min-width: 380px) {
+  .profile__image {
+    max-height: 10rem;
+    max-width: 10rem;
+    min-width: 10rem;
+    min-height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.filterMenu {
+  padding: 1em;
+  margin-top: 2em;
+  margin-left: 0;
+}
+.filterMenu label {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.filterMenu select {
+  background-color: #901c1c;
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.3em;
+}
+
+.photos img {
+  width: 30%;
 }/*# sourceMappingURL=main.css.map */

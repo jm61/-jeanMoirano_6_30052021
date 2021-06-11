@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='icon' href='data:;base64,iVBORw0KGgo='>
-    <link rel="stylesheet" href="dist/css/main.css" type="text/css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <link rel="stylesheet" href="dist/css/main.css" type="text/css" />
+  </head>
+  <body>
     <header class="header__profile">
-        <a href="/"><img src="public/images/logo.png" alt="" class="header__logo"></a>
+      <a href="/"
+        ><img src="public/images/logo.png" alt="" class="header__logo"
+      /></a>
     </header>
-   <main class="main__content">
-       <section class="profile">
-           <div class="profile__details">
-               <h1 class="profile__details__name">Mimi Keel</h1>
-                <div class="profile__details__location">London, UK</div>
-                <br>
-                <div class="profile__details__tagline">Lorem ipsum dolor sit amet</div>
-               <ul class="tagList left">
-                   <li>#fashion</li>
-                   <li>#sport</li>
-                   <li>#travel</li>
-                </ul>
-           </div>
-           <div><button class="profile__contact">Contactez-moi</button></div>
-           <div >
-               <img class="profile__image" src="/public/images/Photographers/MimiKeel.jpg" alt="">
-           </div>
-       </section>
-   </main>
+    <main>
+      <section class="profile">
+        <div class="profile__details">
+          <h1 class="profile__details__name"></h1>
+          <div class="profile__details__location"></div>
+          <br />
+          <div class="profile__details__tagline"></div>
+          <ul class="tagList left">
+          </ul>
+        </div>
+        <div><button class="profile__contact">Contactez-moi</button></div>
+        <div>
+          <img
+            class="profile__image"
+            src=""
+            alt=""
+          />
+        </div>
+      </section>
+      <div class="filterMenu">
+        <label for="filter" tabindex="0">Trier par &nbsp &nbsp</label>
+        <select id="filter">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+      <section class="photos"></section>
+    </main>
     <script src="dist/js/photographerPage.js"></script>
-</body>
+  </body>
 </html>
