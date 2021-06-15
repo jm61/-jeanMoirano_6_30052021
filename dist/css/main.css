@@ -119,10 +119,6 @@ a {
   background-color: #901c1c;
 }
 
-body {
-  border: 2px dashed black;
-}
-
 .header__profile {
   display: block;
   padding: 1.2rem;
@@ -192,10 +188,8 @@ body {
   }
 }
 .profile__image {
-  max-height: 12rem;
-  max-width: 12rem;
-  min-width: 12rem;
-  min-height: 12rem;
+  max-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 20vw;
@@ -229,6 +223,155 @@ body {
   border-radius: 0.3em;
 }
 
-.photos img {
-  width: 30%;
+.photosGallery {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 2px dashed orange;
+}
+
+.mediaCard {
+  width: 350px;
+  margin: 20px auto;
+}
+.mediaCard img, .mediaCard video {
+  max-width: 350px;
+  max-height: 300px;
+  min-width: 350px;
+  min-height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.mediaCard__desc {
+  display: flex;
+  justify-content: flex-end;
+  color: #901c1c;
+  max-width: inherit;
+}
+.mediaCard__desc__name {
+  font-size: 24px;
+  margin-right: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mediaCard__desc__number {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+.footer {
+  background-color: #db8876;
+  color: #000000;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  right: calc(100vw - 90%);
+  border-radius: 5px 5px 0 0;
+  padding: 1rem;
+}
+.footer * {
+  margin: 0 1rem;
+  font-size: 1.3rem;
+}
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.btn-submit {
+  background: #901c1c;
+  color: #ffffff;
+  margin-top: 1.2em;
+  padding: 0.9em;
+  width: 10em;
+  height: 4em;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.modalForm {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: calc(50% - 250px);
+  margin: 5% auto;
+  width: 100%;
+  height: auto;
+  max-width: 40rem;
+  background: #db8876;
+  border-radius: 10px;
+  overflow: auto;
+  color: #000000;
+  padding-top: 0.7em;
+}
+.modalForm__body {
+  padding: 0.7em 8%;
+  margin: 0.7em auto;
+}
+.modalForm__body__title {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #000000;
+}
+.modalForm label {
+  opacity: 0.6;
+  font-size: 2rem;
+  font-weight: normal;
+  display: inline-block;
+  margin-bottom: 2px;
+  margin-top: 0.6em;
+}
+.modalForm input {
+  padding: 0.5em;
+  outline: none;
+}
+
+.text-control {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  height: 3em;
+  outline: none;
+}
+.text-control:focus {
+  border: #901c1c solid 4px;
+}
+.text-control--message {
+  height: 184px;
+}
+
+.close {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  color: #ffffff;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

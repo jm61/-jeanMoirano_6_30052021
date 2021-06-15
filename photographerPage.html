@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <script src="https://kit.fontawesome.com/042eba6f6a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="dist/css/main.css" type="text/css" />
   </head>
   <body>
@@ -13,7 +14,75 @@
         ><img src="public/images/logo.png" alt="" class="header__logo"
       /></a>
     </header>
-    <main>
+
+<!-- Contact Modal -->
+  <div class="modal">
+    <div class="modalForm">
+      <div class="modalForm__body">
+        <h1 class="modalForm__body__title"></h1>
+        <form id="form" name="form" novalidate >
+          <div class="formData">
+            <label for="firstName">Prénom</label><br>
+            <input
+              class="text-control"
+              type="text"
+              id="firstName"
+              name="Prénom"
+              placeholder="entrez au moins 2 caractères"
+              onfocusout="validateFirstName()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="lastName">Nom</label><br>
+            <input
+              class="text-control"
+              type="text"
+              id="lastName"
+              name="Nom"
+              placeholder="entrez au moins 2 caractères"
+              onfocusout="validateLastName()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="email">E-mail</label><br>
+            <input
+              class="text-control"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="entrez un email valide"
+              onfocusout="validateEmail()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="message">Votre message</label>
+            <textarea
+              class="text-control text-control--message"
+              name="message"
+              id="message"
+              cols="40"
+              rows="5"
+              placeholder="entrez votre message"></textarea>
+                <span class="helper-text"></span><br>
+          </div>
+
+            <input
+              class="btn-submit"
+              type="submit"
+              value="Envoyer"/>
+                <span class="msg_submitSuccess">
+                </span>
+        </form>
+        <span class="close closeModal-btn" id="modalForm_close">
+        <i class="fas fa-times fa-lg"></i></span>
+    </div>
+  </div>
+  </div>
+
+  <main class="main">
       <section class="profile">
         <div class="profile__details">
           <h1 class="profile__details__name"></h1>
@@ -23,7 +92,7 @@
           <ul class="tagList left">
           </ul>
         </div>
-        <div><button class="profile__contact">Contactez-moi</button></div>
+        <div><button class="profile__contact" >Contactez-moi</button></div>
         <div>
           <img
             class="profile__image"
@@ -40,8 +109,78 @@
           <option value="title">Titre</option>
         </select>
       </div>
-      <section class="photos"></section>
+      <section class="photosGallery"></section>
     </main>
-    <script src="dist/js/photographerPage.js"></script>
+    <footer class="footer">
+      <span class="footer__likesTotal"></i></span>
+      <span class="footer__price"></span>
+    </footer>
+
+<!-- MODAL FORM CONTACT -->
+    <div role="dialog" class="modalForm" id="modalForm">
+      <div class="modalForm__body">
+        <h1 class="modalForm__body__title"></h1>
+        <form id="form" name="form" novalidate >
+          <div class="formData">
+            <label for="firstName">Prénom</label><br>
+            <input
+              class="text-control"
+              type="text"
+              id="firstName"
+              name="Prénom"
+              placeholder="entrez au moins 2 caractères"
+              onfocusout="validateFirstName()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="lastName">Nom</label><br>
+            <input
+              class="text-control"
+              type="text"
+              id="lastName"
+              name="Nom"
+              placeholder="entrez au moins 2 caractères"
+              onfocusout="validateLastName()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="email">E-mail</label><br>
+            <input
+              class="text-control"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="entrez un email valide"
+              onfocusout="validateEmail()"/>
+                <span class="helper-text"></span><br>
+          </div>
+
+          <div class="formData">
+            <label for="message">Votre message</label>
+            <textarea
+              class="text-control text-control--message"
+              name="message"
+              id="message"
+              cols="40"
+              rows="5"
+              placeholder="entrez votre message"></textarea>
+                <span class="helper-text"></span><br>
+          </div>
+
+            <input
+              class="btn-submit"
+              type="submit"
+              value="Envoyer"/>
+                <span class="msg_submitSuccess">
+                </span>
+        </form>
+        <span class="close closeModal-btn" id="modalForm_close">
+        <i class="fas fa-times fa-3x"></i></span>
+    </div>
+  </div>
+    <script src="dist/js/photographerPage.js" defer></script>
+    <script src="dist/js/modalContact.js" defer></script> 
   </body>
 </html>

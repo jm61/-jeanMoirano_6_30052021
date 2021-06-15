@@ -1,6 +1,3 @@
-body {
-    border: 2px dashed black;
-}
 .header__profile {
     display: block;
     padding: 1.2rem;
@@ -61,10 +58,8 @@ body {
         }  
     }
     &__image {
-        max-height: 12rem;
-        max-width: 12rem;
-        min-width: 12rem;
-        min-height: 12rem;
+        max-width: 100%;
+        min-height: 100%;
         object-fit: cover;
         border-radius: 50%;
         margin-left: 20vw;
@@ -95,9 +90,42 @@ body {
         border-radius: .3em;
     }
 }
-.photos {
-    img {
-        width: 30%;
+.photosGallery {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include orange;
+}
+.mediaCard {
+    width: 350px;
+    margin: 20px auto;
+    img, video {
+        max-width: 350px;
+        max-height: 300px;
+        min-width: 350px;
+        min-height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    &__desc{
+        display: flex;
+        justify-content: flex-end;
+        color: $color-primary-background;
+        max-width: inherit;
+        &__name{
+            font-size: 24px;
+            margin-right: auto;
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        &__number{
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
     }
 }
 

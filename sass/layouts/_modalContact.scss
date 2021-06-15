@@ -1,0 +1,86 @@
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.btn-submit {
+    background: $color-primary-background;
+    color: $color-primary-text;
+    margin-top: 1.2em;
+    padding: .9em;
+    width: 10em;
+    height: 4em;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+.modalForm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: calc(50% - 250px);
+    margin: 5% auto;
+    width: 100%;
+    height: auto;
+    max-width: 40rem;
+    background:$color-secondary-background;
+    border-radius: 10px;
+    overflow: auto;
+    color: $color-secondary-text;
+    padding-top: .7em;
+    &__body {
+      padding: .7em 8%;
+      margin: .7em auto;
+      &__title{
+        font-size: 3rem;
+        font-weight: 400;
+        color: $color-secondary-text;
+        }
+      }
+      & label {
+        opacity: .6;
+        font-size: 2rem;
+        font-weight: normal;
+        display: inline-block;
+        margin-bottom: 2px;
+        margin-top: .6em; 
+      }
+      & input {
+        padding: .5em;
+        outline: none;
+      }
+  }
+  
+  .text-control {
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    height: 3em;
+    outline: none;
+    &:focus{
+      border: $color-primary-background solid 4px;
+    }
+    &--message{
+      height: 184px;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    color:  $color-primary-text;
+    cursor: pointer;
+  }
+  
