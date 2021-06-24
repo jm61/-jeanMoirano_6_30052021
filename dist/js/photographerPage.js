@@ -6,19 +6,25 @@ let photographersList = []
 //let mediaList = []
 const photosGallery = document.querySelector('.photosGallery')
 const modalTitle = document.querySelector('.modalForm__body__title')
+const filter = document.querySelector('.filter')
 let photographerName = ''
 let photographerPrice = 0
 let total = []
+let filterOrder
+let photoDate = []
+let photoLikes = []
+let photoTitle = []
+let photoIndex = []
 
 // fetch data from backend
 const getData = async () => {
     const res = await fetch(url)
     const data = await res.json()
-    // get list of photographers data for id
+// get list of photographers data for id
     photographersList = data.photographers
     photographersList.forEach(data => {
         if(data.id == photographerID) {
-        // store photographer price and name for photos dir path
+// store photographer price and name for photos dir path
             photographerName = data.name
             modalTitle.innerHTML = `Contactez-moi<br>${photographerName}`
             photographerPrice = data.price
@@ -46,6 +52,7 @@ class Photographer {
     this.tags = data.tags;
     this.createProfile()    
     }
+
 // DOM selectors
   createProfile() {
     const profileName = document.querySelector('.profile__details__name')
@@ -69,7 +76,8 @@ class Photographer {
         return
     }
 }
-// Photos Gallery section
+
+// Photos Gallery sectioninnerMedia
     const getPhotos = async () => {
     let mediaData
     //let total = []
@@ -78,13 +86,33 @@ class Photographer {
     console.log({photographerName})
     // get list of photos data by photographerId
     mediaData = data.media
-    mediaData.forEach(media => {
+    mediaData.forEach((media) => {
         if(media.photographerId == photographerID) {
             photosGallery.appendChild(CreateMediaCard(media))
             total.push(media.likes)
+    // store data for filtering option
+            photoTitle.push(media.title)
+            photoLikes.push(media.likes)
+            photoDate.push(media.date)
+            ++photoIndex
         }
     })
-    // DOM footer setup
+
+// Get Selected Filter & Sort
+filter.addEventListener('change', e => {
+    filterOrder = e.target.value
+    if(filterOrder == 'date') {
+        console.log(photoDate.sort())
+    }
+    else if(filterOrder == 'title') {
+        console.log(photoTitle.sort())
+    }
+    else if(filterOrder == 'popularity') {
+        console.log(photoLikes.sort((a,b) => b-a ))
+    }
+})
+
+// DOM footer setup
     const likesTotal = document.querySelector('.footer__likesTotal')
     likesTotal.innerHTML = `${total.reduce((acc,el) => acc+el,0)} <i class="fas fa-heart">`
     // set total for footer update
@@ -97,86 +125,72 @@ getPhotos()
 // Class constructor
 // ----------------------------------------------------------------------- //
 
-const CreateMediaCard = (media) => {
-    let cardObj = new mediaCardParts("card", media)
-    let descObj = new mediaCardParts("desc", media)
-    let mediaObj
+const CreateMediaCard = media => {
+    let card = new mediaCardParts("card", media)
+    let cardDetails = new mediaCardParts("details", media)
+    let cardMedia
     if(media.image == undefined){
-        mediaObj = new mediaCardParts("video", media)
+        cardMedia = new mediaCardParts("video", media)
     }
     else{
-        mediaObj  = new mediaCardParts("image", media)
+        cardMedia  = new mediaCardParts("image", media)
     }
-    cardObj.mediaCard.appendChild(mediaObj.mediaMedia)
-    cardObj.mediaCard.appendChild(descObj.mediaDesc)
-
-    return cardObj.mediaCard
+    card.mediaCard.appendChild(cardMedia.innerMedia)
+    card.mediaCard.appendChild(cardDetails.mediaDetails)
+    return card.mediaCard
 }
-// Intermediary between the actual factories classes and the user
+// Building parts of the card
 class mediaCardParts{
     constructor(type, mediaData){
+        // create card container
         if(type === "card"){
-            return new MediaCard()
+            this.mediaCard = document.createElement("div")
+            this.mediaCard.classList.add("mediaCard")
         }
-
-        if(type === "desc"){
-            return new MediaFactory_desc(mediaData)
-        }
-
-        if(type === "video"){
-            return new MediaVideo(mediaData)
-        }
-
-        if(type === "image"){
-            return new MediaImage(mediaData)
-        }
-    }
-}
-
-// Various factories used to build a mediaCard
-class MediaCard{
-    constructor(){
-        this.mediaCard = document.createElement("div")
-        this.mediaCard.classList.add("mediaCard")
-    }
-}
-class MediaVideo{
-    constructor(mediaData){
-        this.mediaMedia = document.createElement("div")
-        // this.mediaMedia.classList.add("mediaCard__image") 
-        this.mediaMedia.classList.add("modalMedia_open")
-        this.mediaMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" controls> <source src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
-    }
-}
-class MediaImage{
-    constructor(mediaData){
-        this.mediaMedia = document.createElement("div")
-        //this.mediaMedia.classList.add("mediaCard__image") 
-        this.mediaMedia.classList.add("modalMedia_open")
-        this.mediaMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
-    }
-}
-class MediaFactory_desc{
-    constructor(mediaData){
-        this.mediaDesc = document.createElement("div")
-        this.mediaName = document.createElement("p")
-        this.mediaLike = document.createElement("p")
-
-        this.mediaDesc.classList.add("mediaCard__desc") 
-        this.mediaName.classList.add("mediaCard__desc__name") 
-        this.mediaLike.classList.add("mediaCard__desc__number") 
-        this.mediaLike.classList.add("add_like_button") 
-
-        this.mediaName.innerHTML = mediaData.title
-        this.mediaLike.innerHTML = `${mediaData.likes} <i class="fas fa-heart" aria-label="likes"></i>`
-        this.mediaLike.addEventListener('click', () => {
+        // create details of the media card
+        if(type === "details"){
+            this.mediaDetails = document.createElement("div")
+            this.mediaName = document.createElement("p")
+            this.mediaLike = document.createElement("p")
+            this.mediaDetails.classList.add("mediaCard__details") 
+            this.mediaName.classList.add("mediaCard__details__name") 
+            this.mediaLike.classList.add("mediaCard__details__number") 
+            this.mediaLike.classList.add("add_like_button") 
+            this.mediaName.innerHTML = mediaData.title
+            this.mediaName.dataset.index = mediaData.id
+            this.mediaLike.innerHTML = `${mediaData.likes} <i class="fas fa-heart" aria-label="likes"></i>`
+            this.mediaLike.addEventListener('click', () => {
             this.mediaLike.innerHTML = `${++mediaData.likes} <i class="fas fa-heart" aria-label="likes"></i>`
             // dynamic update of total likes footer
             document.querySelector('.footer__likesTotal').innerHTML = `${++total} <i class="fas fa-heart">`
-        })
-        this.mediaDesc.appendChild(this.mediaName)
-        this.mediaDesc.appendChild(this.mediaLike)
+            })
+            this.mediaDetails.appendChild(this.mediaName)
+            this.mediaDetails.appendChild(this.mediaLike)
+        }
+        // create DOM for video media
+        if(type === "video"){
+            this.innerMedia = document.createElement("div")
+            this.innerMedia.classList.add("modalMedia_open")
+            // Open Lightbox
+            this.innerMedia.addEventListener('click', () => {
+                launchModalMedia(mediaData.video,mediaData.title,photographerName)
+            })
+            this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" > <source src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
+        }
+        // create DOM for image media
+        if(type === "image"){
+            this.innerMedia = document.createElement("div")
+            this.innerMedia.classList.add("modalMedia_open")
+            // Open Lightbox
+            this.innerMedia.addEventListener('click', () => {
+                launchModalMedia(mediaData.image, mediaData.title, photographerName)
+            })
+            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
+        }
     }
 }
+
+
+
 
 

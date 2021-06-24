@@ -243,20 +243,20 @@ a {
   border-radius: 5px;
   cursor: pointer;
 }
-.mediaCard__desc {
+.mediaCard__details {
   display: flex;
   justify-content: flex-end;
   color: #901c1c;
   max-width: inherit;
 }
-.mediaCard__desc__name {
+.mediaCard__details__name {
   font-size: 24px;
   margin-right: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.mediaCard__desc__number {
+.mediaCard__details__number {
   font-size: 1.4rem;
   font-weight: bold;
   margin-left: 20px;
@@ -281,25 +281,16 @@ a {
 
 .modal {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   padding-top: 100px;
-  /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
 }
 
 .btn-submit {
@@ -313,6 +304,13 @@ a {
   font-size: 1rem;
   border: none;
   cursor: pointer;
+}
+@media (max-width: 636px) {
+  .btn-submit {
+    padding: 0.7em;
+    width: 9em;
+    height: 3em;
+  }
 }
 
 .modalForm {
@@ -330,6 +328,11 @@ a {
   color: #000000;
   padding-top: 0.7em;
 }
+@media (max-width: 636px) {
+  .modalForm {
+    left: 0;
+  }
+}
 .modalForm__body {
   padding: 0.7em 8%;
   margin: 0.7em auto;
@@ -339,13 +342,23 @@ a {
   font-weight: 400;
   color: #000000;
 }
+@media (max-width: 636px) {
+  .modalForm__body__title {
+    font-size: 2rem;
+  }
+}
 .modalForm label {
   opacity: 0.6;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 2px;
   margin-top: 0.6em;
+}
+@media (max-width: 636px) {
+  .modalForm label {
+    font-size: 1.5rem;
+  }
 }
 .modalForm input {
   padding: 0.5em;
@@ -361,6 +374,12 @@ a {
   height: 3em;
   outline: none;
 }
+@media (max-width: 636px) {
+  .text-control {
+    font-size: 1rem;
+    height: 2rem;
+  }
+}
 .text-control:focus {
   border: #901c1c solid 4px;
 }
@@ -374,4 +393,59 @@ a {
   top: 1em;
   color: #ffffff;
   cursor: pointer;
+}
+
+.modalLightbox {
+  display: none;
+  border: 2px dotted green;
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  margin: 0 auto;
+  width: 50%;
+  height: 50vh;
+  padding-top: 40px;
+  background: #ffffff;
+  overflow: hidden;
+}
+.modalLightbox__body {
+  max-height: 900px;
+}
+.modalLightbox__body img, .modalLightbox__body video {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  margin-left: 0;
+}
+.modalLightbox__body p {
+  font-size: 2rem;
+  color: #901c1c;
+  margin-left: 0;
+}
+.modalLightbox__close {
+  position: absolute;
+  top: 0px;
+  left: 450px;
+  font-size: 3rem;
+  color: #901c1c;
+  cursor: pointer;
+}
+
+.lightboxButton {
+  font-size: 3rem;
+  color: #901c1c;
+  cursor: pointer;
+  position: absolute;
+  top: 200px;
+  left: 10px;
+}
+.lightboxButton__left {
+  right: calc(50% + 550px);
+}
+.lightboxButton__right {
+  left: calc(50% + 210px);
+}
+
+a {
+  color: #901c1c;
 }/*# sourceMappingURL=main.css.map */

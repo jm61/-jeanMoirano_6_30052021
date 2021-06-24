@@ -1,15 +1,15 @@
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 .btn-submit {
     background: $color-primary-background;
@@ -22,6 +22,11 @@
     font-size: 1rem;
     border: none;
     cursor: pointer;
+    @media (max-width: 636px) {
+      padding: .7em;
+      width: 9em;
+      height: 3em;
+    }
   }
   
 .modalForm {
@@ -38,6 +43,9 @@
     overflow: auto;
     color: $color-secondary-text;
     padding-top: .7em;
+    @media (max-width: 636px) {
+      left: 0;
+    }
     &__body {
       padding: .7em 8%;
       margin: .7em auto;
@@ -45,22 +53,27 @@
         font-size: 3rem;
         font-weight: 400;
         color: $color-secondary-text;
+        @media (max-width: 636px) {
+          font-size: 2rem;
+        }
         }
       }
       & label {
         opacity: .6;
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: normal;
         display: inline-block;
         margin-bottom: 2px;
         margin-top: .6em; 
+        @media (max-width: 636px) {
+          font-size: 1.5rem;
+        }
       }
       & input {
         padding: .5em;
         outline: none;
       }
   }
-  
   .text-control {
     margin: 0;
     padding: 8px;
@@ -69,6 +82,10 @@
     font-size: 1.3rem;
     height: 3em;
     outline: none;
+    @media (max-width: 636px) {
+      font-size: 1rem;
+      height: 2rem;
+    }
     &:focus{
       border: $color-primary-background solid 4px;
     }
@@ -83,4 +100,5 @@
     color:  $color-primary-text;
     cursor: pointer;
   }
+
   

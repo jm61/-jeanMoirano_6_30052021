@@ -1,0 +1,53 @@
+.modalLightbox {
+    display: none;
+    @include green;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    margin: 0 auto;
+    width: 50%; 
+    height: 50vh;
+    padding-top: 40px;
+    background:$color-primary-text;
+    overflow: hidden;
+    &__body{
+      max-height: 900px;
+      & img, video{
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
+        margin-left: 0;  
+      }
+      & p{
+        font-size: 2rem;
+        color: $color-primary-background;
+        margin-left: 0;  
+      }
+    }
+    &__close{
+      position: absolute;
+      top: 0px;
+      left: 450px;
+      font-size: 3rem;
+      color:  $color-primary-background;
+      cursor: pointer;  
+    }
+}
+
+.lightboxButton{
+  font-size: 3rem;
+  color:  $color-primary-background;
+  cursor: pointer;
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  &__left{
+    right: calc(50% + 550px);  
+  }
+  &__right{
+    left: calc(50% + 210px);  
+  }
+}
+a {
+  color: $color-primary-background;
+}

@@ -77,11 +77,11 @@
                 </span>
         </form>
         <span class="close closeModal-btn" id="modalForm_close">
-        <i class="fas fa-times fa-lg"></i></span>
+        <i class="fas fa-times"></i></span>
     </div>
   </div>
   </div>
-
+<!-- Profile details -->
   <main class="main">
       <section class="profile">
         <div class="profile__details">
@@ -103,84 +103,32 @@
       </section>
       <div class="filterMenu">
         <label for="filter" tabindex="0">Trier par &nbsp &nbsp</label>
-        <select id="filter">
+        <select class="filter">
           <option value="popularity">Popularité</option>
           <option value="date">Date</option>
           <option value="title">Titre</option>
         </select>
       </div>
+<!-- Media Section -->
       <section class="photosGallery"></section>
     </main>
     <footer class="footer">
       <span class="footer__likesTotal"></i></span>
       <span class="footer__price"></span>
     </footer>
-
-<!-- MODAL FORM CONTACT -->
-    <div role="dialog" class="modalForm" id="modalForm">
-      <div class="modalForm__body">
-        <h1 class="modalForm__body__title"></h1>
-        <form id="form" name="form" novalidate >
-          <div class="formData">
-            <label for="firstName">Prénom</label><br>
-            <input
-              class="text-control"
-              type="text"
-              id="firstName"
-              name="Prénom"
-              placeholder="entrez au moins 2 caractères"
-              onfocusout="validateFirstName()"/>
-                <span class="helper-text"></span><br>
-          </div>
-
-          <div class="formData">
-            <label for="lastName">Nom</label><br>
-            <input
-              class="text-control"
-              type="text"
-              id="lastName"
-              name="Nom"
-              placeholder="entrez au moins 2 caractères"
-              onfocusout="validateLastName()"/>
-                <span class="helper-text"></span><br>
-          </div>
-
-          <div class="formData">
-            <label for="email">E-mail</label><br>
-            <input
-              class="text-control"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="entrez un email valide"
-              onfocusout="validateEmail()"/>
-                <span class="helper-text"></span><br>
-          </div>
-
-          <div class="formData">
-            <label for="message">Votre message</label>
-            <textarea
-              class="text-control text-control--message"
-              name="message"
-              id="message"
-              cols="40"
-              rows="5"
-              placeholder="entrez votre message"></textarea>
-                <span class="helper-text"></span><br>
-          </div>
-
-            <input
-              class="btn-submit"
-              type="submit"
-              value="Envoyer"/>
-                <span class="msg_submitSuccess">
-                </span>
-        </form>
-        <span class="close closeModal-btn" id="modalForm_close">
-        <i class="fas fa-times fa-3x"></i></span>
-    </div>
+<!--  Lightbox Section -->
+    <div class="modalLightbox">
+      <div class="modalLightbox__body">
+          <div id="mediaShow"> </div>
+          <p id="mediaName">  </p>
+          <span class="lightboxButton lightboxButton__left" id="lightboxButton_left"> <a href="#"> <i class="fas fa-chevron-left"></i> </a> </span>
+          <span class="lightboxButton lightboxButton__right" id="lightboxButton_right"> <a href="#" > <i class="fas fa-chevron-right"></i></a> </span>
+      </div>
+      <span class="modalLightbox__close"> <a href="#" > <i class="fas fa-times"></i></a> </span>
   </div>
+
     <script src="dist/js/photographerPage.js" defer></script>
-    <script src="dist/js/modalContact.js" defer></script> 
+    <script src="dist/js/modalContact.js" defer></script>
+    <script src="dist/js/lightbox.js" defer></script> 
   </body>
 </html>

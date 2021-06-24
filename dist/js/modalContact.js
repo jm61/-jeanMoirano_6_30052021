@@ -4,7 +4,6 @@ const modalForm = document.querySelector(".modalForm");
 const modalBtn = document.querySelectorAll(".profile__contact");
 const form = document.querySelector("#form");
 const close = document.querySelector('.fa-times')
-const content = document.querySelector('.main')
 // Variables
 const red = "#eee"
 // check RegEx
@@ -112,8 +111,7 @@ form.addEventListener('submit', e => {
   e.preventDefault()
 
   if(validateFirstName() && validateLastName() && validateEmail() && validateMessage()) {
-    //success.style ="display:flex;"
-    modalForm.style="display:none;"
+    modalForm.style.display="none"
     modal.style.display = "none"
     // Dump fields form
     for(i=0; i<form.elements.length; i++) {
