@@ -1,0 +1,51 @@
+.grid {
+    display: grid;
+    padding: 1rem;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 1rem;
+}
+.grid img {
+    display: block;
+    width: 100%;
+}
+.lightbox {
+    position: fixed;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    background-color: rgba(0,0,0,.9);
+    z-index: 1;
+    opacity: 1;
+}
+.lightbox__container {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+button {
+    border: none;
+    position: absolute;
+    cursor: pointer;
+}
+button:hover {
+    opacity: .7;
+}
+.lightbox__prev, .lightbox__next {
+    padding: .5rem;
+    top: 50%;  
+}
+.lightbox__next{
+    left: 0;
+}
+.lightbox__prev{
+    right: 0;
+}
+.lightbox__close{
+    right: 0;
+    font-size: large;
+    border-radius: 0 0 0 50%;
+}

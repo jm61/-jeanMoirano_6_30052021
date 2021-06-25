@@ -171,24 +171,72 @@ class mediaCardParts{
         if(type === "video"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            // Open Lightbox
+            /* // Open Lightbox
             this.innerMedia.addEventListener('click', () => {
                 launchModalMedia(mediaData.video,mediaData.title,photographerName)
-            })
+            }) */
             this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" > <source src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
         }
+
         // create DOM for image media
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            // Open Lightbox
+            /* // Open Lightbox
             this.innerMedia.addEventListener('click', () => {
                 launchModalMedia(mediaData.image, mediaData.title, photographerName)
-            })
+            }) */
             this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
         }
     }
 }
+
+class Lightbox {
+    static init() {
+        const links = document.querySelectorAll('img,video')
+        links.forEach(link => link.addEventListener('click', e => {
+            e.preventDefault()
+            new Lightbox(e.currentTarget.getAttribute('src'))  
+        }))
+    }
+    close(e) {
+        e.preventDefault()
+        console.log(this.element)
+        this.element.style.display = "none"
+    }
+    
+  /**
+  * @param {string} url
+  */
+  constructor (url) {
+      this.element = this.buildDom(url)
+     //const element = this.buildDom(url)
+     document.body.appendChild(this.element)
+  }
+    buildDom(url) {
+        const dom = document.createElement('div')
+        dom.classList.add('modalLightbox')
+        dom.innerHTML = `
+        <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
+     <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
+     <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
+     <div class="lightbox__container">
+        <img src="${url}" alt="">
+     </div>`
+     dom.querySelector('.modalLightbox__close').addEventListener('click', 
+         this.close.bind(this))
+     return dom
+    }
+  }
+  setTimeout(() => {
+      Lightbox.init()
+      console.log('init')
+  },3000)
+
+
+
+
+
 
 
 

@@ -97,7 +97,7 @@ class Photographer {
 function getPhotographersList(tagSelection) {
     // selection of all photographers cards elements
     const selectAllPhotographers = document.querySelectorAll('.photographerCard')
-    // remove '#' from tagSelectiob
+    // remove '#' from tagSelection
     tagSelection = tagSelection.slice(1, tagSelection.length)
     // for loop on photographers list
     for(let i=0;i<photographersList.length;i++){

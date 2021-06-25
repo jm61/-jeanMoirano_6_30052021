@@ -1,20 +1,19 @@
 .modalLightbox {
-    display: none;
-    @include green;
+    display: block;
     position: fixed;
-    top: 10%;
-    left: 10%;
+    top: 0;
+    left: 0;
     margin: 0 auto;
-    width: 50%; 
-    height: 50vh;
-    padding-top: 40px;
+    width: 100%; 
+    height: 100vh;
+    padding-top: 2.2rem;
     background:$color-primary-text;
     overflow: hidden;
     &__body{
-      max-height: 900px;
+      max-height: 100vh;
       & img, video{
-        height: 200px;
-        width: 200px;
+        height: 850px;
+        width: 900px;
         object-fit: cover;
         margin-left: 0;  
       }
@@ -50,4 +49,8 @@
 }
 a {
   color: $color-primary-background;
+}
+
+.test {
+  display: none;
 }
