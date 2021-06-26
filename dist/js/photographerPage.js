@@ -171,67 +171,111 @@ class mediaCardParts{
         if(type === "video"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            /* // Open Lightbox
-            this.innerMedia.addEventListener('click', () => {
-                launchModalMedia(mediaData.video,mediaData.title,photographerName)
-            }) */
-            this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" > <source src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
+            this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
         }
 
         // create DOM for image media
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            /* // Open Lightbox
-            this.innerMedia.addEventListener('click', () => {
-                launchModalMedia(mediaData.image, mediaData.title, photographerName)
-            }) */
             this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
         }
     }
 }
 
+/**
+ * @property {HTMLElement} element
+ * @property {string[]} gallery
+ * @property {string} url
+ */
 class Lightbox {
     static init() {
-        const links = document.querySelectorAll('img,video')
+        const links = Array.from(document.querySelectorAll('img,video'))
+        links.shift();links.shift();
+        let gallery = links.map(link => link.getAttribute('src'))
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
             new Lightbox(e.currentTarget.getAttribute('src'))  
         }))
     }
+    /**
+     * 
+     * @param {KeyboardEvent} e 
+     */
+    onKeyUp(e) {
+        if(e.key === 'Escape') {
+            this.close(e)
+        }
+    }
+    /**
+     * 
+     * @param {MouseEvent} e 
+     */
     close(e) {
         e.preventDefault()
-        console.log(this.element)
         this.element.style.display = "none"
+        document.removeEventListener('keyup', this.onKeyUp)
     }
-    
+    /**
+     * 
+     * @param {MouseEvent/KeyboardEvent} 
+     */
+    next(e) {
+        e.preventDefault()
+        let i = this.gallery.findIndex(image => image === this.url)
+        console.log(this.gallery[i+1])
+    }
+    prev(e) {
+        e.preventDefault()
+    }
+
   /**
   * @param {string} url
+  * @param {string[]} gallery
   */
-  constructor (url) {
+  constructor (url, gallery) {
       this.element = this.buildDom(url)
+      this.gallery = gallery
+      this.onKeyUp = this.onKeyUp.bind(this)
      //const element = this.buildDom(url)
      document.body.appendChild(this.element)
+     document.addEventListener('keyup', this.onKeyUp)
   }
     buildDom(url) {
+        let mediaType = url.split('.')
+        mediaType = mediaType[1]
+        // InnerHTML selection between jpg and mp4
         const dom = document.createElement('div')
         dom.classList.add('modalLightbox')
+        if(mediaType === 'jpg') {
         dom.innerHTML = `
         <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
      <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
      <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
-     <div class="lightbox__container">
-        <img src="${url}" alt="">
+     <div class="lightbox__container"><img src="${url}" alt="" />
      </div>`
+        } else {
+        dom.innerHTML = `
+        <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
+     <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
+     <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
+     <div class="lightbox__container"><video controls src="${url}" alt="" />
+     </div>`
+        }
      dom.querySelector('.modalLightbox__close').addEventListener('click', 
          this.close.bind(this))
+     dom.querySelector('.lightboxButton__left').addEventListener('click', 
+         this.prev.bind(this))
+     dom.querySelector('.lightboxButton__right').addEventListener('click', 
+         this.next.bind(this))
      return dom
     }
   }
   setTimeout(() => {
       Lightbox.init()
       console.log('init')
-  },3000)
+  },2000)
+
 
 
 
