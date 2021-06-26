@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap'); */
 *, *::after, *::before {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: clamp(320px, 100vw, 1440px);
   margin: auto;
   font-size: 1rem;
@@ -395,7 +395,7 @@ a {
 }
 
 .modalLightbox {
-  display: block;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -409,13 +409,13 @@ a {
 .modalLightbox__body {
   max-height: 100vh;
 }
-.modalLightbox__body img, .modalLightbox__body video {
+.modalLightbox img, .modalLightbox video {
   height: 850px;
   width: 900px;
   object-fit: cover;
   margin-left: 0;
 }
-.modalLightbox__body p {
+.modalLightbox p {
   font-size: 2rem;
   color: #901c1c;
   margin-left: 0;
@@ -446,10 +446,6 @@ a {
 
 a {
   color: #901c1c;
-}
-
-.test {
-  display: none;
 }
 
 .grid {

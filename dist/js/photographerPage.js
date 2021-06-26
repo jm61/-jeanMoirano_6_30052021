@@ -3,7 +3,6 @@ const url = 'dist/data.json';
 const urlParams = new URLSearchParams(window.location.search)
 const photographerID = urlParams.get('id')
 let photographersList = []
-//let mediaList = []
 const photosGallery = document.querySelector('.photosGallery')
 const modalTitle = document.querySelector('.modalForm__body__title')
 const filter = document.querySelector('.filter')
@@ -14,7 +13,6 @@ let filterOrder
 let photoDate = []
 let photoLikes = []
 let photoTitle = []
-let photoIndex = []
 
 // fetch data from backend
 const getData = async () => {
@@ -42,7 +40,7 @@ getData()
 // Photographer profile class
 class Photographer {
     constructor(data) {
-    this.id = data.id;
+    //this.id = data.id;
     this.portrait = data.portrait;
     this.name = data.name;
     this.city = data.city;
@@ -94,7 +92,6 @@ class Photographer {
             photoTitle.push(media.title)
             photoLikes.push(media.likes)
             photoDate.push(media.date)
-            ++photoIndex
         }
     })
 
@@ -157,7 +154,6 @@ class mediaCardParts{
             this.mediaLike.classList.add("mediaCard__details__number") 
             this.mediaLike.classList.add("add_like_button") 
             this.mediaName.innerHTML = mediaData.title
-            this.mediaName.dataset.index = mediaData.id
             this.mediaLike.innerHTML = `${mediaData.likes} <i class="fas fa-heart" aria-label="likes"></i>`
             this.mediaLike.addEventListener('click', () => {
             this.mediaLike.innerHTML = `${++mediaData.likes} <i class="fas fa-heart" aria-label="likes"></i>`
@@ -173,12 +169,11 @@ class mediaCardParts{
             this.innerMedia.classList.add("modalMedia_open")
             this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
         }
-
         // create DOM for image media
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
+            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view" data-title="${mediaData.title}"></a>`
         }
     }
 }
@@ -191,11 +186,13 @@ class mediaCardParts{
 class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('img,video'))
+        const titles = Array.from(document.querySelectorAll('.mediaCard__details__name'))
         links.shift();links.shift();
-        let gallery = links.map(link => link.getAttribute('src'))
+        const gallery = links.map(link => link.getAttribute('src'))
+        const photoTitle = titles.map(title => title.textContent)
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
-            new Lightbox(e.currentTarget.getAttribute('src'))  
+            new Lightbox(e.currentTarget.getAttribute('src'),gallery,photoTitle)
         }))
     }
     /**
@@ -205,6 +202,10 @@ class Lightbox {
     onKeyUp(e) {
         if(e.key === 'Escape') {
             this.close(e)
+        } else if(e.key === 'ArrowLeft') {
+            this.prev(e)
+        } else if(e.key === 'ArrowRight') {
+            this.next(e)
         }
     }
     /**
@@ -218,50 +219,70 @@ class Lightbox {
     }
     /**
      * 
-     * @param {MouseEvent/KeyboardEvent} 
+     * @param {MouseEvent/KeyboardEvent} e
      */
     next(e) {
         e.preventDefault()
-        let i = this.gallery.findIndex(image => image === this.url)
-        console.log(this.gallery[i+1])
+        let i = this.gallery.findIndex(media => media === this.url)
+        if(i === this.gallery.length -1) {
+            i = -1
+        }
+        this.loadImage(this.gallery[i+1])
     }
     prev(e) {
         e.preventDefault()
+        let i = this.gallery.findIndex(media => media === this.url)
+        if(i === 0) {
+            i = this.gallery.length
+        }
+        this.loadImage(this.gallery[i-1])
     }
 
   /**
   * @param {string} url
   * @param {string[]} gallery
   */
-  constructor (url, gallery) {
+  constructor (url,gallery,photoTitle) {
       this.element = this.buildDom(url)
       this.gallery = gallery
+      this.photoTitle = photoTitle
+      console.log(this.photoTitle)
+      this.loadImage(url,photoTitle)
       this.onKeyUp = this.onKeyUp.bind(this)
-     //const element = this.buildDom(url)
      document.body.appendChild(this.element)
      document.addEventListener('keyup', this.onKeyUp)
   }
-    buildDom(url) {
-        let mediaType = url.split('.')
-        mediaType = mediaType[1]
-        // InnerHTML selection between jpg and mp4
+  loadImage(url,photoTitle ) {
+    this.url = null
+    this.photoTitle = null
+    const image = document.createElement('img')
+    const video = document.createElement('video')
+    const title = document.createElement('p')
+    video.controls = true
+    const container = this.element.querySelector('.lightbox__container')
+    container.innerHTML = ''
+    let mediaType = url.split('.')
+    mediaType = mediaType[1]
+    if(mediaType === 'jpg') {
+        container.appendChild(image)
+        container.appendChild(title)
+        this.url = url
+        image.src = url
+    } else {
+        container.appendChild(video)
+        this.url = url
+        video.src = url
+    }       
+  }
+  
+    buildDom() {
         const dom = document.createElement('div')
         dom.classList.add('modalLightbox')
-        if(mediaType === 'jpg') {
         dom.innerHTML = `
         <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
      <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
      <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
-     <div class="lightbox__container"><img src="${url}" alt="" />
-     </div>`
-        } else {
-        dom.innerHTML = `
-        <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
-     <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
-     <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
-     <div class="lightbox__container"><video controls src="${url}" alt="" />
-     </div>`
-        }
+     <div class="lightbox__container"></div>`
      dom.querySelector('.modalLightbox__close').addEventListener('click', 
          this.close.bind(this))
      dom.querySelector('.lightboxButton__left').addEventListener('click', 
@@ -270,7 +291,7 @@ class Lightbox {
          this.next.bind(this))
      return dom
     }
-  }
+}
   setTimeout(() => {
       Lightbox.init()
       console.log('init')

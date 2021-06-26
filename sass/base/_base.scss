@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap'); */
 
 *, *::after, *::before {
     margin: 0;
@@ -7,7 +7,8 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    // font-family: 'Roboto', sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: clamp(320px, 100vw, 1440px);
     margin: auto;
     font-size: 1rem;

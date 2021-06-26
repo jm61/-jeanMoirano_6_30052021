@@ -1,5 +1,5 @@
 .modalLightbox {
-    display: block;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,6 +11,7 @@
     overflow: hidden;
     &__body{
       max-height: 100vh;
+    }
       & img, video{
         height: 850px;
         width: 900px;
@@ -22,7 +23,7 @@
         color: $color-primary-background;
         margin-left: 0;  
       }
-    }
+    
     &__close{
       position: absolute;
       top: 0px;
@@ -49,8 +50,4 @@
 }
 a {
   color: $color-primary-background;
-}
-
-.test {
-  display: none;
 }
