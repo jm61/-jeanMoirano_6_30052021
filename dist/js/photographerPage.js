@@ -186,13 +186,16 @@ class mediaCardParts{
 class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('img,video'))
-        const titles = Array.from(document.querySelectorAll('.mediaCard__details__name'))
+        /* const titles = Array.from(document.querySelectorAll('.mediaCard__details__name')) */
         links.shift();links.shift();
         const gallery = links.map(link => link.getAttribute('src'))
-        const photoTitle = titles.map(title => title.textContent)
+        const photoTitle = links.map(link => link.getAttribute('alt'))
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
-            new Lightbox(e.currentTarget.getAttribute('src'),gallery,photoTitle)
+            new Lightbox(
+                e.currentTarget.getAttribute('src'),
+                gallery,
+                e.currentTarget.getAttribute('alt'))
         }))
     }
     /**
@@ -227,7 +230,7 @@ class Lightbox {
         if(i === this.gallery.length -1) {
             i = -1
         }
-        this.loadImage(this.gallery[i+1])
+        this.loadImage(this.gallery[i+1],photoTitle[i+1])
     }
     prev(e) {
         e.preventDefault()
@@ -235,7 +238,7 @@ class Lightbox {
         if(i === 0) {
             i = this.gallery.length
         }
-        this.loadImage(this.gallery[i-1])
+        this.loadImage(this.gallery[i-1],photoTitle[i-1])
     }
 
   /**
@@ -268,10 +271,15 @@ class Lightbox {
         container.appendChild(title)
         this.url = url
         image.src = url
+        this.photoTitle = photoTitle
+        title.textContent = photoTitle
     } else {
         container.appendChild(video)
+        container.appendChild(title)
         this.url = url
         video.src = url
+        this.photoTitle = photoTitle
+        title.textContent = photoTitle
     }       
   }
   
