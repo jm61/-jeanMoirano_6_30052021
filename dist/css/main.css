@@ -409,6 +409,13 @@ a {
   color: #901c1c;
   cursor: pointer;
 }
+@media (max-width: 380px) {
+  .lightbox__close {
+    top: 250px;
+    left: calc(50% + 160px);
+    font-size: 1.5rem;
+  }
+}
 .lightbox__nav {
   color: #901c1c;
   cursor: pointer;
@@ -433,11 +440,24 @@ a {
   color: #901c1c;
   margin-left: calc(50% - 525px);
 }
+@media (max-width: 380px) {
+  .lightbox__container p {
+    font-size: 1rem;
+    margin-left: calc(50% - 150px);
+  }
+}
 .lightbox__container img, .lightbox__container video {
   height: 700px;
   width: 900px;
   object-fit: cover;
   margin-left: calc(50% - 525px);
+}
+@media (max-width: 380px) {
+  .lightbox__container img, .lightbox__container video {
+    height: 250px;
+    width: 300px;
+    margin-left: calc(50% - 150px);
+  }
 }
 
 button {

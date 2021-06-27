@@ -12,6 +12,11 @@
     left: calc(42% + 550px);
     color:  $color-primary-background;
     cursor: pointer;
+    @media (max-width: $mobile-bp-max) {
+      top: 250px;
+      left: calc(50% + 160px);
+      font-size: 1.5rem;
+    }
   }
   &__nav {
   color:  $color-primary-background;
@@ -35,12 +40,21 @@
       font-size: 1.5rem;
       color: $color-primary-background;
       margin-left: calc(50% - 525px);
+      @media (max-width: $mobile-bp-max) {
+        font-size: 1rem;
+        margin-left: calc(50% - 150px);
+      }
     }
     & img, video{
       height: 700px;
       width: 900px;
       object-fit: cover;
       margin-left: calc(50% - 525px);
+      @media (max-width: $mobile-bp-max) {
+        height: 250px;
+        width: 300px;
+        margin-left: calc(50% - 150px);
+      }
     }
   }
 }
