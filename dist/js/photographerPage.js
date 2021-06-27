@@ -75,7 +75,7 @@ class Photographer {
     }
 }
 
-// Photos Gallery sectioninnerMedia
+// Photos Gallery sectionInnerMedia
     const getPhotos = async () => {
     let mediaData
     //let total = []
@@ -173,11 +173,11 @@ class mediaCardParts{
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view" data-title="${mediaData.title}"></a>`
+            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
         }
     }
 }
-
+// ------------- LIGHTBOX ----------------------------- //
 /**
  * @property {HTMLElement} element
  * @property {string[]} gallery
@@ -186,10 +186,11 @@ class mediaCardParts{
 class Lightbox {
     static init() {
         const links = Array.from(document.querySelectorAll('img,video'))
-        /* const titles = Array.from(document.querySelectorAll('.mediaCard__details__name')) */
+        // remove links on logo and portrait
         links.shift();links.shift();
+        // get array of url and title
         const gallery = links.map(link => link.getAttribute('src'))
-        const photoTitle = links.map(link => link.getAttribute('alt'))
+        photoTitle = links.map(link => link.getAttribute('alt'))
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
             new Lightbox(
@@ -285,17 +286,17 @@ class Lightbox {
   
     buildDom() {
         const dom = document.createElement('div')
-        dom.classList.add('modalLightbox')
+        dom.classList.add('lightbox')
         dom.innerHTML = `
-        <button class="modalLightbox__close"><i class="fas fa-times"></i></button>
-     <button class="lightboxButton lightboxButton__left"><i class="fas fa-chevron-left"></i></button>
-     <button class="lightboxButton lightboxButton__right"><i class="fas fa-chevron-right"></i></button>
+        <button class="lightbox__close"><i class="fas fa-times"></i></button>
+     <button class="lightbox__nav lightbox__nav__left"><i class="fas fa-chevron-left"></i></button>
+     <button class="lightbox__nav lightbox__nav__right"><i class="fas fa-chevron-right"></i></button>
      <div class="lightbox__container"></div>`
-     dom.querySelector('.modalLightbox__close').addEventListener('click', 
+     dom.querySelector('.lightbox__close').addEventListener('click', 
          this.close.bind(this))
-     dom.querySelector('.lightboxButton__left').addEventListener('click', 
+     dom.querySelector('.lightbox__nav__left').addEventListener('click', 
          this.prev.bind(this))
-     dom.querySelector('.lightboxButton__right').addEventListener('click', 
+     dom.querySelector('.lightbox__nav__right').addEventListener('click', 
          this.next.bind(this))
      return dom
     }
