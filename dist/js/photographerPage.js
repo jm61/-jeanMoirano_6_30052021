@@ -9,9 +9,6 @@ const filter = document.querySelector('.filter')
 let photographerName = ''
 let photographerPrice = 0
 let total = []
-let filterOrder
-let photoDate = []
-let photoLikes = []
 let photoTitle = []
 
 // fetch data from backend
@@ -78,36 +75,61 @@ class Photographer {
 // Photos Gallery sectionInnerMedia
     const getPhotos = async () => {
     let mediaData
-    //let total = []
+    let photoList = []
     const res = await fetch(url)
     const data = await res.json()
-    console.log({photographerName})
     // get list of photos data by photographerId
     mediaData = data.media
     mediaData.forEach((media) => {
         if(media.photographerId == photographerID) {
+            photoList.push(media)
             photosGallery.appendChild(CreateMediaCard(media))
             total.push(media.likes)
-    // store data for filtering option
-            photoTitle.push(media.title)
-            photoLikes.push(media.likes)
-            photoDate.push(media.date)
         }
     })
-
-// Get Selected Filter & Sort
-filter.addEventListener('change', e => {
-    filterOrder = e.target.value
-    if(filterOrder == 'date') {
-        console.log(photoDate.sort())
-    }
-    else if(filterOrder == 'title') {
-        console.log(photoTitle.sort())
-    }
-    else if(filterOrder == 'popularity') {
-        console.log(photoLikes.sort((a,b) => b-a ))
-    }
-})
+            // Get Selected Filter & Sort
+            filter.addEventListener('change', e => {
+                let filterOrder = e.target.value
+                // popularity selected
+                if(filterOrder === 'popularity' ) {
+                    photosGallery.innerHTML = ''
+                    let sort1 = photoList.sort((a,b) => {
+                        return b.likes - a.likes
+                    })
+                    sort1.forEach(media => {
+                        photosGallery.appendChild(CreateMediaCard(media))
+                        Lightbox.init()
+                    })
+                    } else if(filterOrder === 'date') {
+                        photosGallery.innerHTML = ''
+                        let sort2 = photoList.sort((a,b) => {
+                            let da = new Date(a.date),
+                            db = new Date(b.date);
+                            return da - db
+                        })
+                        sort2.forEach(media => {
+                        photosGallery.appendChild(CreateMediaCard(media))
+                        Lightbox.init()
+                        })
+                    } else if(filterOrder === 'title') {
+                        photosGallery.innerHTML = ''
+                        let sort3 = photoList.sort((a,b) => {
+                            let fa = a.title.toLowerCase(),
+                            fb = b.title.toLowerCase();
+                                if (fa < fb) {
+                                return -1;
+                                }
+                                if (fa > fb) {
+                                return 1;
+                                }
+                                return 0;
+                            })
+                        sort3.forEach(media => {
+                        photosGallery.appendChild(CreateMediaCard(media))
+                        Lightbox.init()
+                        })
+                    }
+            })
 
 // DOM footer setup
     const likesTotal = document.querySelector('.footer__likesTotal')
@@ -250,7 +272,6 @@ class Lightbox {
       this.element = this.buildDom(url)
       this.gallery = gallery
       this.photoTitle = photoTitle
-      console.log(this.photoTitle)
       this.loadImage(url,photoTitle)
       this.onKeyUp = this.onKeyUp.bind(this)
      document.body.appendChild(this.element)
