@@ -107,16 +107,32 @@ function setValid(field){
 }
 
 // Handle Form for submit
-form.addEventListener('submit', e => {
+const test = form.addEventListener('submit', e => {
   e.preventDefault()
 
   if(validateFirstName() && validateLastName() && validateEmail() && validateMessage()) {
-    modalForm.style.display="none"
-    modal.style.display = "none"
-    // Dump fields form
-    for(i=0; i<form.elements.length; i++) {
-      console.log(form.elements[i].value)
-    }
-    form.reset()
+    submitForm()
   }
 })
+
+// Add keyboard events to close and submit the form
+modalForm.addEventListener('keyup', function (event) {
+  if (event.key === 'Escape') {
+    modalForm.style.display = "none"
+    modal.style.display = "none"
+    console.log('Esc')
+  }
+  if (event.key === 'Enter') {
+    test
+  }
+});
+
+function submitForm(){
+  modalForm.style.display="none"
+  modal.style.display = "none"
+  // Dump fields form
+  for(i=0; i<form.elements.length; i++) {
+    console.log(form.elements[i].value)
+  }
+  form.reset()
+}

@@ -1,11 +1,11 @@
 .tagList{
     list-style: none;
-    color: $color-primary-background;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    & li{
+    &__tag {
         border: 1px solid $color-tag-border;
+        //background-color: $color-primary-text;
         text-transform: capitalize;
         border-radius: .7rem;
         font-style: normal;
@@ -13,8 +13,13 @@
         font-size: .75rem;
         line-height: 1;
         cursor: pointer;
-        padding: 2px 5px;
-        margin: 3px;        
+        margin: 5px;
+        padding: 2px;
+        user-select: none;
+        &__active {
+            color: $color-primary-text;
+            background-color: $color-primary-background;
+        }        
     }
 }
 .activeTag{

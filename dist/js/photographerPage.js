@@ -53,7 +53,7 @@ class Photographer {
     const profileName = document.querySelector('.profile__details__name')
     const profileLocation = document.querySelector('.profile__details__location')
     const profileTagline = document.querySelector('.profile__details__tagline')
-    const profileImage = document.querySelector('.profile__image')
+    const profileImage = document.querySelector('.profile__portrait__image')
     const tagList = document.querySelector('.tagList')
 
 // DOM data injection
@@ -195,7 +195,7 @@ class mediaCardParts{
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view"></a>`
+            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view" tabindex=0></a>`
         }
     }
 }
@@ -213,13 +213,25 @@ class Lightbox {
         // get array of url and title
         const gallery = links.map(link => link.getAttribute('src'))
         photoTitle = links.map(link => link.getAttribute('alt'))
+        
         links.forEach(link => link.addEventListener('click', e => {
             e.preventDefault()
+            initLightbox(e)    
+        }))
+        links.forEach(link => link.addEventListener('keyup', e => {
+            if(e.keyCode === 13) {
+                e.preventDefault()
+                initLightbox(e)  
+            }
+              
+        }))
+
+        function initLightbox(e) {
             new Lightbox(
                 e.currentTarget.getAttribute('src'),
                 gallery,
                 e.currentTarget.getAttribute('alt'))
-        }))
+        }
     }
     /**
      * 

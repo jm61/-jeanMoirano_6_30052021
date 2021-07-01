@@ -7,23 +7,24 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
     <script src="public/fa.js"></script>
     <link rel="stylesheet" href="dist/css/main.css" type="text/css" />
+    <title>#</title>
   </head>
   <body>
-    <header class="header__profile">
-      <a href="index.html"
-        ><img src="public/images/logo.png" alt="" class="header__logo"
-      /></a>
+    <header class="header__profile" aria-label="photographer profile">
+      <a href="index.html" title="home page" >
+        <img src="public/images/logo.png" alt="logo" class="header__logo" aria-hidden="true"/></a>
     </header>
 
 <!-- Contact Modal -->
   <div class="modal">
-    <div class="modalForm">
+    <div class="modalForm" tabindex="-1">
       <div class="modalForm__body">
-        <h1 class="modalForm__body__title"></h1>
-        <form id="form" name="form" novalidate >
+        <h1 class="modalForm__body__title">#</h1>
+        <form id="form" name="form" novalidate  >
           <div class="formData">
             <label for="firstName">Prénom</label><br>
             <input
+              autofocus 
               class="text-control"
               type="text"
               id="firstName"
@@ -82,10 +83,10 @@
   </div>
   </div>
 <!-- Profile details -->
-  <main class="main">
+  <main class="main" aria-hidden="false">
       <section class="profile">
         <div class="profile__details">
-          <h1 class="profile__details__name"></h1>
+          <h1 class="profile__details__name">#</h1>
           <div class="profile__details__location"></div>
           <br />
           <div class="profile__details__tagline"></div>
@@ -93,27 +94,27 @@
           </ul>
         </div>
         <div><button class="profile__contact" >Contactez-moi</button></div>
-        <div>
+        <div class="profile__portrait">
           <img
-            class="profile__image"
+            class="profile__portrait__image"
             src=""
             alt=""
           />
         </div>
       </section>
       <div class="filterMenu">
-        <label for="filter" tabindex="0">Trier par &nbsp &nbsp</label>
-        <select class="filter">
+        <label for="filter">Trier par &nbsp; &nbsp;</label>
+        <select class="filter" title="filter">
           <option value="popularity">Popularité</option>
           <option value="date">Date</option>
           <option value="title">Titre</option>
         </select>
       </div>
 <!-- Media Section -->
-      <section class="photosGallery"></section>
+      <section class="photosGallery" aria-label="photos gallery"></section>
     </main>
-    <footer class="footer">
-      <span class="footer__likesTotal"></i></span>
+    <footer class="footer" aria-label="likes and price">
+      <span class="footer__likesTotal"></span>
       <span class="footer__price"></span>
     </footer>
 

@@ -32,3 +32,23 @@
         font-weight: 400;
     }
 }
+.skiptocontent {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    color: #000;
+    background: $color-secondary-background;
+    width: 182px;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 4px 0 0 0;
+
+    &:hover {
+      color: #fff;
+      background: $color-primary-background;
+    }
+  }

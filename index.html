@@ -5,20 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' href='data:;base64,iVBORw0KGgo='>
-    <script src="https://kit.fontawesome.com/042eba6f6a.js" crossorigin="anonymous"></script>
+    <script src="public/fa.js"></script>
     <link rel="stylesheet" href="dist/css/main.css" type="text/css">
     <title>FishEye App</title>
 </head>
 <body>
-    <header class="header">
-        <img src="public/images/logo.png" alt="logo" class="header__logo">
-        <nav class="header__nav">
+    <header class="header" aria-hidden="false">
+        <img src="public/images/logo.png" alt="fisheye logo" class="header__logo">
+        <nav class="header__nav" aria-label="photographer categories">
+            <a href="#main" class="skiptocontent" style="top: -100px;">Passer au contenu</a>
             <ul class="tagList"></ul>
         </nav>
         <h1 class="header__title">Nos photographes</h1>
     </header>
     <main class="main">
-        <section class="main__content">
+        <section class="main__content" aria-label="photographers">
         </section>
     </main>
 <script src="dist/js/main.js"></script>    

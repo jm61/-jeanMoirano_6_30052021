@@ -4,6 +4,18 @@ const headerTags = document.querySelector('.tagList')
 let photographersList = []
 let tagList = []
 
+document.addEventListener("scroll", skipToContent);
+function skipToContent() {
+    const link = document.querySelector('.skiptocontent')
+    const banner = document.querySelector('.header')
+  if (window.scrollY >= banner.offsetHeight - 20) {
+    link.style.top = "6px"
+  }
+  if (window.scrollY < banner.offsetHeight - 20) {
+    link.style.top = "-100px"
+  }
+}
+
 const getData = async () => {
     const res = await fetch(url)
     const data = await res.json()
@@ -22,23 +34,28 @@ const getData = async () => {
     // append tags list to the DOM (header)
     tagList.forEach(item => {
         const elementLI = document.createElement('li')
-        elementLI.textContent = `#${item}`
+        const elementA = document.createElement('a')
+        elementA.classList.add('tagList__tag','header__tag')
+        elementA.tabIndex = 0
+        elementLI.appendChild(elementA)
+        elementA.textContent = `#${item}`
         headerTags.appendChild(elementLI)
     })
     // toggle tag active and inactive others
-    const tagsList = document.querySelectorAll('li');
-        tagsList.forEach(e => {
-            e.addEventListener('click', () => {
-                e.classList.add('activeTag')
+    const tagsList = document.querySelectorAll('.header__tag');
+        tagsList.forEach(el => {
+            el.addEventListener('focus', e => {
+                e.preventDefault()
+                el.classList.add('activeTag')
+                    // get selected tag for filtering
+                    const tagSelection = el.textContent
+                    // call the function to filter photographers
+                    getPhotographersList(tagSelection)
                 tagsList.forEach(f => {
-                    if(f != e) {
+                    if(f != el) {
                         f.classList.remove('activeTag')
                     }
-                })
-                // get selected tag for filtering
-                const tagSelection = e.textContent
-                // call the function to filter photographers
-                getPhotographersList(tagSelection)
+                })               
             })
         })
 }
@@ -72,15 +89,16 @@ class Photographer {
 // DOM Generation
         photographerName.innerHTML = `
         <a href="photographerPage.html?id=${this.id}">
-        <img src="public/images/Photographers/${this.portrait}"><br>${this.name}</a>"`;
+        <img src="public/images/Photographers/${this.portrait}" alt="${this.name}"><br>${this.name}</a>`;
 
         photographerDetails.innerHTML = `
         <strong>${this.city}, ${this.country} </strong> <br>
         ${this.tagline}<br>
-        <em> $${this.price} day</em>`;
+        <em> €${this.price} /jour</em>`;
 
         this.tags.forEach(e => {
             const tag = document.createElement('li')
+            tag.classList.add('tagList__tag')
             tag.textContent = `#${e}`
             photographerTags.appendChild(tag)
         })
@@ -95,8 +113,18 @@ class Photographer {
 }
 // Function of photographer selection on tag filter
 function getPhotographersList(tagSelection) {
-    // selection of all photographers cards elements
     const selectAllPhotographers = document.querySelectorAll('.photographerCard')
+    const reset = document.querySelector('.header__logo')
+    reset.addEventListener('mouseover', () => {
+        selectAllPhotographers.forEach(e => {
+            e.style.display = 'block'
+        })
+        const tags = document.querySelectorAll('a')
+        tags.forEach(e => {
+            e.classList.remove('activeTag')
+        })
+    })
+    // selection of all photographers cards elements
     // remove '#' from tagSelection
     tagSelection = tagSelection.slice(1, tagSelection.length)
     // for loop on photographers list
@@ -109,9 +137,10 @@ function getPhotographersList(tagSelection) {
             }
     // DOM display selection photographer
             if(isTagInPhotographer) {
+                //selectAllPhotographers[i].classList.toggle('nofilter')
                 selectAllPhotographers[i].style.display = "block"
-            }
-            else {
+            } else {
+                //selectAllPhotographers[i].classList.toggle('filter')
                 selectAllPhotographers[i].style.display = "none"
             }
         }

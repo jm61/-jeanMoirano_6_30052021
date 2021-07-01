@@ -6,6 +6,7 @@
     margin: 2em 3em;
     &__name{
         cursor: pointer;
+        color: $color-name-profile;
         & img{
             max-width: 15rem;
             max-height: 15rem;
@@ -18,5 +19,11 @@
     }
     &__description{
         margin-bottom: .3rem;
+        strong {
+            color: $color-name-profile;
+        }
+        em {
+            color: #525252;
+        }
     }
 }
