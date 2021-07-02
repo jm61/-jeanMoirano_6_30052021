@@ -31,6 +31,7 @@ const getData = async () => {
     })
     // make tags list unique
     tagList = new Set(tagList.flat())
+    tagList = Array.from(tagList).sort()
     // append tags list to the DOM (header)
     tagList.forEach(item => {
         const elementLI = document.createElement('li')
@@ -42,9 +43,9 @@ const getData = async () => {
         headerTags.appendChild(elementLI)
     })
     // toggle tag active and inactive others
-    const tagsList = document.querySelectorAll('.header__tag');
+    const tagsList = document.querySelectorAll('.tagList__tag');
         tagsList.forEach(el => {
-            el.addEventListener('focus', e => {
+            el.addEventListener('click', e => {
                 e.preventDefault()
                 el.classList.add('activeTag')
                     // get selected tag for filtering
@@ -56,6 +57,21 @@ const getData = async () => {
                         f.classList.remove('activeTag')
                     }
                 })               
+            })
+            el.addEventListener('keyup', e => {
+                e.preventDefault()
+                if(e.key === 'Enter') {
+                    el.classList.add('activeTag')
+                    // get selected tag for filtering
+                    const tagSelection = el.textContent
+                    // call the function to filter photographers
+                    getPhotographersList(tagSelection)
+                tagsList.forEach(f => {
+                    if(f != el) {
+                        f.classList.remove('activeTag')
+                    }
+                })
+                }                             
             })
         })
 }
@@ -98,8 +114,11 @@ class Photographer {
 
         this.tags.forEach(e => {
             const tag = document.createElement('li')
-            tag.classList.add('tagList__tag')
-            tag.textContent = `#${e}`
+            const link = document.createElement('a')
+            link.tabIndex = 0
+            tag.appendChild(link)
+            link.classList.add('tagList__tag','header__tag')
+            link.textContent = `#${e}`
             photographerTags.appendChild(tag)
         })
 
