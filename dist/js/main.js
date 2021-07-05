@@ -36,7 +36,7 @@ const getData = async () => {
     tagList.forEach(item => {
         const elementLI = document.createElement('li')
         const elementA = document.createElement('a')
-        elementA.classList.add('tagList__tag','header__tag')
+        elementA.classList.toggle('tagList__tag','header__tag')
         elementA.tabIndex = 0
         elementLI.appendChild(elementA)
         elementA.textContent = `#${item}`
@@ -133,16 +133,6 @@ class Photographer {
 // Function of photographer selection on tag filter
 function getPhotographersList(tagSelection) {
     const selectAllPhotographers = document.querySelectorAll('.photographerCard')
-    const reset = document.querySelector('.header__logo')
-    reset.addEventListener('mouseover', () => {
-        selectAllPhotographers.forEach(e => {
-            e.style.display = 'block'
-        })
-        const tags = document.querySelectorAll('a')
-        tags.forEach(e => {
-            e.classList.remove('activeTag')
-        })
-    })
     // selection of all photographers cards elements
     // remove '#' from tagSelection
     tagSelection = tagSelection.slice(1, tagSelection.length)
