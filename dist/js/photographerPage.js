@@ -1,3 +1,4 @@
+// const and variables definition
 const url = 'dist/data.json';
 // get url params from ?id=
 const urlParams = new URLSearchParams(window.location.search)
@@ -142,8 +143,6 @@ class Photographer {
 getPhotos()
 
 // Class constructor
-// ----------------------------------------------------------------------- //
-
 const CreateMediaCard = media => {
     let card = new mediaCardParts("card", media)
     let cardDetails = new mediaCardParts("details", media)

@@ -4,6 +4,7 @@ const headerTags = document.querySelector('.tagList')
 let photographersList = []
 let tagList = []
 
+// function to add/remove top banner (scroll event)
 document.addEventListener("scroll", skipToContent);
 function skipToContent() {
     const link = document.querySelector('.skiptocontent')
@@ -15,7 +16,7 @@ function skipToContent() {
     link.style.top = "-100px"
   }
 }
-
+// fetch data photographers from json
 const getData = async () => {
     const res = await fetch(url)
     const data = await res.json()
@@ -45,6 +46,7 @@ const getData = async () => {
     // toggle tag active and inactive others
     const tagsList = document.querySelectorAll('.tagList__tag');
         tagsList.forEach(el => {
+        // mouse event management
             el.addEventListener('click', e => {
                 e.preventDefault()
                 el.classList.add('activeTag')
@@ -58,6 +60,7 @@ const getData = async () => {
                     }
                 })               
             })
+        // keybboard event management
             el.addEventListener('keyup', e => {
                 e.preventDefault()
                 if(e.key === 'Enter') {
@@ -77,8 +80,7 @@ const getData = async () => {
 }
 getData()
 
-// Photographer data object
-// Data extraction
+// Photographer data object Data extraction
 class Photographer {
     constructor(data) {
     this.id = data.id;
