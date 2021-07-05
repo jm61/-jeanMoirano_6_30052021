@@ -50,11 +50,11 @@
       width: 900px;
       object-fit: cover;
       margin-left: calc(50% - 525px);
-      @media (max-width: $mobile-bp-max) {
+      /* @media (max-width: $mobile-bp-max) {
         height: 250px;
         width: 300px;
         margin-left: calc(50% - 150px);
-      }
+      } */
     }
   }
 }
