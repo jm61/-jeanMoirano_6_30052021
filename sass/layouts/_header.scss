@@ -11,10 +11,6 @@
     @media screen and (max-width: $desktop-bp-max) {
         flex-direction: column;
         margin: 1em auto;
-        :nth-child(2) {
-            order:1;
-            padding-left: 0;
-        } 
     }    
     &__logo{
         max-width: 12.5rem;

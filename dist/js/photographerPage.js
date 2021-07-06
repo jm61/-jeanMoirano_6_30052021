@@ -188,13 +188,13 @@ class mediaCardParts{
         if(type === "video"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            this.innerMedia.innerHTML = `<a href="#" > <video alt="${mediaData.title}" src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4">${mediaData.title}, closeup view </video> </a>`
+            this.innerMedia.innerHTML = `<a href="#" tabindex=-1> <video alt="${mediaData.title}" src="public/images/Sample/${photographerName}/${mediaData.video}" type="video/mp4" tabindex=0>${mediaData.title}, closeup view </video> </a>`
         }
         // create DOM for image media
         if(type === "image"){
             this.innerMedia = document.createElement("div")
             this.innerMedia.classList.add("modalMedia_open")
-            this.innerMedia.innerHTML = `<a href="#" > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view" tabindex=0></a>`
+            this.innerMedia.innerHTML = `<a href="#" tabindex=-1 > <img src="public/images/Sample/${photographerName}/${mediaData.image}" alt="${mediaData.title}, closeup view" tabindex=0></a>`
         }
     }
 }
