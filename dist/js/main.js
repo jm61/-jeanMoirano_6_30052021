@@ -1,4 +1,4 @@
-const url = 'dist/data.json';
+const url = 'dist/result.json';
 const mainContent = document.querySelector('.main__content')
 const headerTags = document.querySelector('.tagList')
 let photographersList = []

@@ -67,6 +67,7 @@ class Photographer {
     this.tags.forEach(e => {
         const tag = document.createElement('li')
         tag.textContent = `#${e}`
+        tag.classList.add('tagList__tag')
         tagList.appendChild(tag)
         }) 
         return
@@ -252,7 +253,7 @@ class Lightbox {
     close(e) {
         e.preventDefault()
         this.element.style.display = "none"
-        document.removeEventListener('keyup', this.onKeyUp)
+        //document.removeEventListener('keyup', this.onKeyUp)
     }
     /**
      * 
